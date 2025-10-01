@@ -1,0 +1,13 @@
+{
+  "version": "0.2",
+  "language": "en",
+  "ignorePaths": ["node_modules/**"],
+  "dictionaries": ["cspell-words"],
+  "dictionaryDefinitions": [
+    {
+      "name": "cspell-words",
+      "path": "./cspell-words.txt",
+      "addWords": true
+    }
+  ]
+}
