@@ -1,11 +1,7 @@
-import {
-  FlameIcon,
-  HistoryIcon,
-  HomeIcon,
-  ListVideoIcon,
-  PlaySquareIcon,
-  ThumbsUpIcon,
-} from 'lucide-react';
+'use client';
+
+import { useAuth, useClerk } from '@clerk/nextjs';
+import { HistoryIcon, ListVideoIcon, ThumbsUpIcon } from 'lucide-react';
 import Link from 'next/link';
 
 import {
@@ -39,6 +35,19 @@ const items = [
 ];
 
 export function PersonalSection() {
+  const { isSignedIn } = useAuth();
+  const { openSignIn } = useClerk();
+
+  const handleMenuButtonClick = (
+    event: React.MouseEvent<HTMLButtonElement>,
+    item: (typeof items)[number],
+  ) => {
+    if (item.auth && !isSignedIn) {
+      event.preventDefault();
+      openSignIn();
+    }
+  };
+
   return (
     <SidebarGroup>
       <SidebarGroupLabel>You</SidebarGroupLabel>
@@ -46,7 +55,11 @@ export function PersonalSection() {
         <SidebarMenu>
           {items.map((item) => (
             <SidebarMenuItem key={item.title}>
-              <SidebarMenuButton tooltip={item.title} asChild>
+              <SidebarMenuButton
+                tooltip={item.title}
+                onClick={(e) => handleMenuButtonClick(e, item)}
+                asChild
+              >
                 <Link href={item.url} className="flex items-center gap-4">
                   <item.icon />
                   <span className="text-sm">{item.title}</span>
