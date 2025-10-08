@@ -1,6 +1,13 @@
-import { caller } from '@/trpc/server';
+'use client';
 
-export async function UserGreeting() {
-  const { greeting } = await caller.hello({ text: 'world' });
-  return <span>{greeting}</span>;
+import { useSuspenseQuery } from '@tanstack/react-query';
+
+import { useTRPC } from '@/trpc/client';
+
+export function UserGreeting() {
+  const trpc = useTRPC();
+  const queryOptions = trpc.hello.queryOptions({ text: 'world' });
+  const { data } = useSuspenseQuery(queryOptions);
+
+  return <span>{data.greeting}</span>;
 }
