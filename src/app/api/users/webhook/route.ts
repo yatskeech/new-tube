@@ -3,7 +3,7 @@ import { eq } from 'drizzle-orm';
 import { NextRequest } from 'next/server';
 
 import { db } from '@/db';
-import { usersTable } from '@/db/schema';
+import { users } from '@/db/schema';
 
 export async function POST(req: NextRequest) {
   try {
@@ -13,7 +13,7 @@ export async function POST(req: NextRequest) {
       case 'user.created': {
         const { id, first_name, last_name, email_addresses, image_url } = data;
 
-        await db.insert(usersTable).values({
+        await db.insert(users).values({
           clerkId: id,
           name: `${first_name} ${last_name}`,
           email: email_addresses[0]?.email_address,
@@ -28,20 +28,20 @@ export async function POST(req: NextRequest) {
           return new Response('No user ID', { status: 400 });
         }
 
-        await db.delete(usersTable).where(eq(usersTable.clerkId, id));
+        await db.delete(users).where(eq(users.clerkId, id));
         break;
       }
       case 'user.updated': {
         const { id, first_name, last_name, image_url } = data;
 
         await db
-          .update(usersTable)
+          .update(users)
           .set({
             name: `${first_name} ${last_name}`,
             imageUrl: image_url,
             updatedAt: new Date(),
           })
-          .where(eq(usersTable.clerkId, id));
+          .where(eq(users.clerkId, id));
         break;
       }
       default: {

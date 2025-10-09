@@ -231,6 +231,42 @@ function CarouselNext({
   );
 }
 
+function FadePrevious({ className }: { className?: string }) {
+  const { orientation, canScrollPrev } = useCarousel();
+
+  return (
+    <span
+      className={cn(
+        `pointer-events-none absolute z-10 bg-gradient-to-r from-white
+        to-transparent transition-opacity`,
+        orientation === 'horizontal'
+          ? 'top-0 bottom-0 -left-12 w-12'
+          : '-top-12 right-0 left-0 h-12',
+        !canScrollPrev && 'opacity-0',
+        className,
+      )}
+    />
+  );
+}
+
+function FadeNext({ className }: { className?: string }) {
+  const { orientation, canScrollNext } = useCarousel();
+
+  return (
+    <span
+      className={cn(
+        `pointer-events-none absolute z-10 bg-gradient-to-l from-white
+        to-transparent transition-opacity`,
+        orientation === 'horizontal'
+          ? 'top-0 -right-12 bottom-0 w-12'
+          : 'right-0 -bottom-12 left-0 h-12',
+        !canScrollNext && 'opacity-0',
+        className,
+      )}
+    />
+  );
+}
+
 export {
   Carousel,
   type CarouselApi,
@@ -238,4 +274,6 @@ export {
   CarouselItem,
   CarouselNext,
   CarouselPrevious,
+  FadeNext,
+  FadePrevious,
 };

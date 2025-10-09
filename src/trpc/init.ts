@@ -5,7 +5,7 @@ import { cache } from 'react';
 import superjson from 'superjson';
 
 import { db } from '@/db';
-import { usersTable } from '@/db/schema';
+import { users } from '@/db/schema';
 import { ratelimit } from '@/lib/ratelimit';
 
 export const createTRPCContext = cache(async () => {
@@ -28,8 +28,8 @@ export const protectedProcedure = t.procedure.use(async (opts) => {
 
   const [user] = await db
     .select()
-    .from(usersTable)
-    .where(eq(usersTable.clerkId, ctx.clerkUserId))
+    .from(users)
+    .where(eq(users.clerkId, ctx.clerkUserId))
     .limit(1);
 
   if (!user) {

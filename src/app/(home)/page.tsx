@@ -1,17 +1,14 @@
-import { Suspense } from 'react';
-
+import { HomeView } from '@/modules/home/ui';
 import { HydrateClient, prefetch, trpc } from '@/trpc/server';
 
-import { UserGreeting } from './greeting';
+export const dynamic = 'force-dynamic';
 
 export default async function Page() {
-  prefetch(trpc.hello.queryOptions({ text: 'world' }));
+  prefetch(trpc.categories.getMany.queryOptions());
 
   return (
     <HydrateClient>
-      <Suspense fallback={<span>Loading...</span>}>
-        I will videos in the future: <UserGreeting />
-      </Suspense>
+      <HomeView />
     </HydrateClient>
   );
 }

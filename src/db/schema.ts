@@ -7,7 +7,7 @@ import {
   varchar,
 } from 'drizzle-orm/pg-core';
 
-export const usersTable = pgTable(
+export const users = pgTable(
   'users',
   {
     id: uuid('id').primaryKey().defaultRandom(),
@@ -19,4 +19,16 @@ export const usersTable = pgTable(
     email: varchar({ length: 255 }).notNull().unique(),
   },
   (t) => [uniqueIndex('clerk_id_idx').on(t.clerkId)],
+);
+
+export const categories = pgTable(
+  'categories',
+  {
+    id: uuid('id').primaryKey().defaultRandom(),
+    name: text('name').notNull().unique(),
+    description: text('description'),
+    createdAt: timestamp('created_at').defaultNow().notNull(),
+    updatedAt: timestamp('updated_at').defaultNow().notNull(),
+  },
+  (t) => [uniqueIndex('name_idx').on(t.name)],
 );
