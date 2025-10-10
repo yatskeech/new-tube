@@ -6,7 +6,7 @@ import superjson from 'superjson';
 
 import { db } from '@/db';
 import { users } from '@/db/schema';
-import { ratelimit } from '@/lib/ratelimit';
+import { ratelimit } from '@/shared/lib';
 
 export const createTRPCContext = cache(async () => {
   const { userId } = await auth();
