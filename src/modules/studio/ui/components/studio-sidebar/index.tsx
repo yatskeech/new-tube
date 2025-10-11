@@ -15,7 +15,7 @@ import {
   SidebarMenuItem,
 } from '@/components/ui/sidebar';
 
-import { StudioSidebarHeader } from './studio-sidebar-header';
+import { UserSidebarMenuItem } from './user-sidebar-menu-item';
 
 export function StudioSidebar() {
   const pathname = usePathname();
@@ -25,8 +25,8 @@ export function StudioSidebar() {
       <SidebarContent className="bg-background">
         <SidebarGroup>
           <SidebarGroupContent>
-            <StudioSidebarHeader />
             <SidebarMenu>
+              <UserSidebarMenuItem />
               <SidebarMenuItem>
                 <SidebarMenuButton
                   isActive={pathname === '/studio'}

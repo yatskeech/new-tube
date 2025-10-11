@@ -4,7 +4,6 @@ import { useUser } from '@clerk/nextjs';
 import Link from 'next/link';
 
 import {
-  SidebarHeader,
   SidebarMenuButton,
   SidebarMenuItem,
   useSidebar,
@@ -12,7 +11,7 @@ import {
 import { Skeleton } from '@/components/ui/skeleton';
 import { UserAvatar } from '@/shared/ui';
 
-export function StudioSidebarHeader() {
+export function UserSidebarMenuItem() {
   const { user } = useUser();
   const { state } = useSidebar();
 
@@ -38,7 +37,7 @@ export function StudioSidebarHeader() {
   }
 
   return (
-    <SidebarHeader className="flex items-center justify-center pb-4">
+    <SidebarMenuItem className="flex items-center justify-center pb-4">
       <Link href="/users/current">
         <UserAvatar
           name={user.fullName ?? 'User'}
@@ -52,18 +51,18 @@ export function StudioSidebarHeader() {
           {user.fullName ?? 'User'}
         </span>
       </div>
-    </SidebarHeader>
+    </SidebarMenuItem>
   );
 }
 
 function UserAvatarSkeleton() {
   return (
-    <SidebarHeader className="flex items-center justify-center pb-4">
+    <SidebarMenuItem className="flex items-center justify-center pb-4">
       <Skeleton className="size-[112px] rounded-full" />
       <div className="mt-2 flex flex-col items-center gap-1">
         <span className="text-sm font-medium">Your profile</span>
         <Skeleton className="text-red w-24 text-xs">&nbsp;</Skeleton>
       </div>
-    </SidebarHeader>
+    </SidebarMenuItem>
   );
 }
