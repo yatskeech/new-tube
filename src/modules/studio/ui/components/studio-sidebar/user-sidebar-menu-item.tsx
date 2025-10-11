@@ -37,7 +37,7 @@ export function UserSidebarMenuItem() {
   }
 
   return (
-    <SidebarMenuItem className="flex items-center justify-center pb-4">
+    <SidebarMenuItem className="flex flex-col items-center justify-center pb-4">
       <Link href="/users/current">
         <UserAvatar
           name={user.fullName ?? 'User'}
@@ -57,11 +57,11 @@ export function UserSidebarMenuItem() {
 
 function UserAvatarSkeleton() {
   return (
-    <SidebarMenuItem className="flex items-center justify-center pb-4">
+    <SidebarMenuItem className="flex flex-col items-center justify-center pb-4">
       <Skeleton className="size-[112px] rounded-full" />
       <div className="mt-2 flex flex-col items-center gap-1">
         <span className="text-sm font-medium">Your profile</span>
-        <Skeleton className="text-red w-24 text-xs">&nbsp;</Skeleton>
+        <Skeleton className="text-red w-24 text-xs" />
       </div>
     </SidebarMenuItem>
   );
