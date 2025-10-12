@@ -19,18 +19,18 @@ type FilterCarouselProps = {
   filters?: { value: string; label: string }[];
 };
 
-const FILTER_SEARCH_PARAM = 'categoryId';
+const FILTER_SEARCH_PARAM = 'category';
 
 export function FilterCarousel({ filters }: FilterCarouselProps) {
   const pathname = usePathname();
   const searchParams = useSearchParams();
-  const categoryId = searchParams.get(FILTER_SEARCH_PARAM);
+  const category = searchParams.get(FILTER_SEARCH_PARAM);
 
-  const getFilterLink = (categoryId?: string) => {
+  const getFilterLink = (category?: string) => {
     const filterSearchParams = new URLSearchParams(searchParams);
 
-    if (categoryId) {
-      filterSearchParams.set(FILTER_SEARCH_PARAM, categoryId);
+    if (category) {
+      filterSearchParams.set(FILTER_SEARCH_PARAM, category);
     } else {
       filterSearchParams.delete(FILTER_SEARCH_PARAM);
     }
@@ -48,7 +48,7 @@ export function FilterCarousel({ filters }: FilterCarouselProps) {
       <CarouselContent className="-ml-3">
         <CarouselItem className="basis-auto pl-3">
           <Badge
-            variant={!categoryId ? 'default' : 'secondary'}
+            variant={!category ? 'default' : 'secondary'}
             className="cursor-pointer rounded-lg px-3 py-1 text-sm
               whitespace-nowrap"
             asChild
@@ -59,7 +59,7 @@ export function FilterCarousel({ filters }: FilterCarouselProps) {
         {filters?.map((filter) => (
           <CarouselItem key={filter.value} className="basis-auto pl-3">
             <Badge
-              variant={filter.value === categoryId ? 'default' : 'secondary'}
+              variant={filter.value === category ? 'default' : 'secondary'}
               className="cursor-pointer rounded-lg px-3 py-1 text-sm
                 whitespace-nowrap"
               asChild
@@ -77,7 +77,7 @@ export function FilterCarousel({ filters }: FilterCarouselProps) {
 
 export function FilterCarouselSkeleton() {
   const searchParams = useSearchParams();
-  const categoryId = searchParams.get(FILTER_SEARCH_PARAM);
+  const category = searchParams.get(FILTER_SEARCH_PARAM);
 
   return (
     <Carousel
@@ -89,7 +89,7 @@ export function FilterCarouselSkeleton() {
       <CarouselContent className="-ml-3">
         <CarouselItem className="basis-auto pl-3">
           <Badge
-            variant={!categoryId ? 'default' : 'secondary'}
+            variant={!category ? 'default' : 'secondary'}
             className="cursor-pointer rounded-lg px-3 py-1 text-sm
               whitespace-nowrap"
           >

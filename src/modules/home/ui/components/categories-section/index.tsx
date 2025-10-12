@@ -26,7 +26,10 @@ function CategoriesSectionSuspense() {
 
   return (
     <FilterCarousel
-      filters={categories.map(({ id, name }) => ({ value: id, label: name }))}
+      filters={categories.map(({ slug, name }) => ({
+        value: slug,
+        label: name,
+      }))}
     />
   );
 }

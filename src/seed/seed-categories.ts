@@ -1,3 +1,5 @@
+import slugify from 'slugify';
+
 import { db } from '@/db';
 import { categories } from '@/db/schema';
 
@@ -24,6 +26,7 @@ export async function seedCategories() {
   const values = categoryNames.map((name) => ({
     name,
     description: `Videos related to ${name.toLocaleLowerCase()}`,
+    slug: slugify(name, { lower: true }),
   }));
 
   try {

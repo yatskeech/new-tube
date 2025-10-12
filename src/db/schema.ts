@@ -11,7 +11,7 @@ export const users = pgTable(
   'users',
   {
     id: uuid('id').primaryKey().defaultRandom(),
-    clerkId: text('clerk_id').unique().notNull(),
+    clerkId: text('clerk_id').notNull(),
     name: text('name').notNull(),
     imageUrl: text('image_url').notNull(),
     createdAt: timestamp('created_at').defaultNow().notNull(),
@@ -25,10 +25,11 @@ export const categories = pgTable(
   'categories',
   {
     id: uuid('id').primaryKey().defaultRandom(),
+    slug: text('slug').notNull(),
     name: text('name').notNull().unique(),
     description: text('description'),
     createdAt: timestamp('created_at').defaultNow().notNull(),
     updatedAt: timestamp('updated_at').defaultNow().notNull(),
   },
-  (t) => [uniqueIndex('name_idx').on(t.name)],
+  (t) => [uniqueIndex('slug_idx').on(t.slug)],
 );
